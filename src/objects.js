@@ -179,7 +179,55 @@ let goPosition = {
             })
         }
 
-    }
+    },
+    hideHeader(headerSelector, hideKlass, showKlass) {
+        let lastCords = 0;
+        let header = document.querySelector(headerSelector);
+
+        if (pageYOffset > 0) {
+            header.classList.add('onway');
+        }
+
+        window.addEventListener('scroll', function(){
+            let state = window.pageYOffset;
+            if (state > lastCords) {
+                header.classList.remove(hideKlass);
+                if (pageYOffset > 0) {
+                    header.classList.add(showKlass);
+                } else {
+                    header.classList.remove(showKlass);
+                }
+            } else {
+                header.classList.add(hideKlass);
+                header.classList.remove(showKlass);
+            }
+            lastCords = state;
+        })
+    },
+    fixHeader(headerSelector, fixKlass) {
+    let header = document.querySelector(headerSelector);
+        document.addEventListener('scroll', ()=>{
+            if (window.pageYOffset === 0) {
+                header.classList.remove(fixKlass);
+            } else {
+                header.classList.add(fixKlass);
+            }
+        })
+    },
+    ghostHere(menuSlector, showKlass) {
+    let lastCords = 0;
+    let menu = document.querySelector(menuSelector);
+
+    window.addEventListener('scroll', function(){
+        let state = window.pageYOffset;
+        if (state > lastCords) {
+            menu.classList.remove(showKlass);
+        } else {
+            state > 500 ? menu.classList.add(showKlass) : menu.classList.remove(showKlass);
+        }
+        lastCords = state;
+    })
+}
 }
 
 // Galleries
