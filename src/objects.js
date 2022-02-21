@@ -90,7 +90,7 @@ let blockToggler = {
             })
         })
     },
-    openers(openPlate, close = true) {
+    openers(openPlate, icon = 'svg', close = true) {
         $(openPlate).each(function (index, elem) {
             $(elem).parent().css('overflow', 'hidden');
             $(elem).data('height', $(elem).next().height());
@@ -105,10 +105,10 @@ let blockToggler = {
                 $(this).parent().toggleClass('open');
                 if ($(this).next().height() === 0) {
                     $(this).next().css('height', $(this).data('height'));
-                    $(this).find('svg').css('transform', 'rotate(180deg)');
+                    $(this).find(icon).css('transform', 'rotate(180deg)');
                 } else {
                     $(this).next().css('height', 0);
-                    $(this).find('svg').css('transform', 'rotate(0)');
+                    $(this).find(icon).css('transform', 'rotate(0)');
                 }
             })
         })
