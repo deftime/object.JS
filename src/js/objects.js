@@ -45,8 +45,8 @@ let classToggler = {
         }
     },
     _intoView(selector) {
-        let colect = document.querySelectorAll(selector);
-        for (let key of colect) {
+        let collect = document.querySelectorAll(selector);
+        for (let key of collect) {
             key.addEventListener('click', function(event){
                 event.target.scrollIntoView({
                     behavior: 'smooth',
@@ -262,10 +262,19 @@ let gallery = {
 
 // Collect and move any element's data
 let dataMover = {
-    tabText(elemsSet, dataName, targetElem) {
+    // Move text from data element's set to single target
+    moveText(elemsSet, dataElem, targetElem) {
         if ($(elemsSet.length > 0)) {
             $(elemsSet).on('click', function(){
-                $(targetElem).text(this.dataset[dataName]);
+                $(targetElem).text(this.dataset[dataElem]);
+            })
+        }
+    },
+    // Move class or ID from element's set to single target data
+    moveMark(elemsSet, targetElem){
+        if ($(elemsSet).length > 0){
+            $(elemsSet).on('click', function(){
+                $(targetElem).data('mode', this.classList[0]);
             })
         }
     }

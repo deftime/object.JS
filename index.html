@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.JS Demo</title>
+
+    <link rel="stylesheet" href="./src/css/styles.css">
+    <script src="./src/js/jquery-3.6.0.min.js" defer></script>
+    <script src="./src/js/objects.js" defer></script>
+    <script src="./src/js/demo.js" defer></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <div class="main-title">Objects.JS</div>
+        <div class="main-sub">Made by Default</div>
+    </header>
+    <div class="object-title">
+        <span>Class toggler</span>
+        <span>Switch classes at various elements</span>
+    </div>
+    <section>
+        <div class="title">Toggle class by click on element</div>
+        <div class="demo ct-simple">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title">Toggle parent class by click on element</div>
+        <div class="demo ct-parent">
+            <div class="cube">
+                <span>Active</span>
+                <div class="inner"></div>
+            </div>
+            <div class="cube">
+                <span>Active</span>
+                <div class="inner"></div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="title">SET class by click on element</div>
+        <div class="demo ct-set">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title">REMOVE class by click on element</div>
+        <div class="demo ct-remove">
+            <div class="cube active"><span>Active</span></div>
+            <div class="cube active"><span>Active</span></div>
+            <div class="cube active"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title ct-target">
+            <span>Toggle/Set/Remove class target element</span>
+            <div class="btns">
+                <button class="set">Set</button>
+                <button class="remove">Remove</button>
+            </div>
+        </div>
+        <div class="demo ct-target">
+            <div class="cube one"><span>Active target</span></div>
+            <div class="cube two"><span>Active target</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title ct-rotate">
+            <span>Rotate class among elements</span>
+            <div class="btns">
+                <button>Into view</button>
+            </div>
+        </div>
+        <div class="demo ct-rotate">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <footer></footer>
+</div>
+
+</body>
+</html>

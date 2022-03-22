@@ -1,0 +1,168 @@
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../fonts/OrbitronRegular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../fonts/OrbitronMedium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url('../fonts/OrbitronBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+/* GLOBAL */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Orbitron', sans-serif;
+}
+
+.wrapper {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 30px 10px;
+}
+
+/* GENERAL */
+
+.main-title {
+  font-size: 50px;
+  line-height: 55px;
+  text-align: center;
+}
+
+.main-sub {
+  font-size: 15px;
+  line-height: 25px;
+  font-style: italic;
+  text-align: center;
+}
+
+.object-title {
+  margin: 25px 0;
+  padding: 30px 10px;
+  font-size: 30px;
+  line-height: 35px;
+  text-align: center;
+  border-top: 3px dotted #3375a7;
+  border-bottom: 3px dotted #3375a7;
+}
+
+.object-title span {
+  display: block;
+}
+
+.object-title span:last-child {
+  font-size: 15px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  line-height: 23px;
+  font-weight: 500;
+  padding: 20px 10px;
+  border-bottom: 1px solid #000;
+}
+
+.demo {
+  display: flex;
+  padding: 15px;
+}
+
+.cube {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  padding: 10px;
+  margin-right: 20px;
+  background-color: #a29e9e;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.cube:last-child {
+  margin-right: 0;
+}
+
+.cube span {
+  display: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.cube.active {
+  background-color: #59a733;
+}
+
+.cube.active span {
+  display: block;
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.btns button {
+  border: none;
+  background-color: #3375a7;
+  font-size: 15px;
+  line-height: 18px;
+  color: #fff;
+  font-weight: 500;
+  padding: 5px 15px;
+  text-align: center;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.btns button.active {
+  transform: scale(0.9);
+  font-size: 14px;
+  font-weight: 400;
+  background-color: #59a733;
+}
+
+/* PERSONAL */
+
+.ct-parent .cube {
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.ct-parent .cube .inner {
+  width: 50%;
+  height: 50px;
+  background-color: #fff;
+}
+
+.ct-parent .cube span {
+  align-self: flex-start;
+}
+
