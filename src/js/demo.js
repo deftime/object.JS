@@ -16,6 +16,8 @@ window.onload = function() {
 
     blockToggler.tabs('.bt-tabs .togg', '.bt-tabs .t-block', 'hard');
     blockToggler.openers('.bt-openers .plate');
+    blockToggler.open('.bt-openclose .js-open', '.bt-openclose .side');
+    blockToggler.close('.bt-openclose .js-close', '.bt-openclose .side');
 
     // Demo support
     ctTarget();

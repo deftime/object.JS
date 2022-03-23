@@ -123,25 +123,33 @@ let blockToggler = {
             $(elemShow).fadeIn();
         })
     },
-    fixHeader(header) {
-        let headerElem = document.querySelector(header);
+    fixHeader(headerSelector, hideKlass, showKlass) {
+        let lastCords = 0;
+        let header = document.querySelector(headerSelector);
 
         if (pageYOffset > 0) {
-            headerElem.classList.add('onway');
+            header.classList.add(showKlass);
         }
 
-        window.addEventListener('wheel', function(event){
-            if (event.deltaY > 0) {
-                headerElem.classList.add('hide');
-                headerElem.classList.remove('onway');
-            } else if (event.deltaY < 0) {
-                headerElem.classList.remove('hide');
+        window.addEventListener('scroll', function(){
+            let state = window.pageYOffset;
+            if (state > lastCords) {
+                header.classList.remove(hideKlass);
                 if (pageYOffset > 0) {
-                    headerElem.classList.add('onway');
+                    header.classList.add(showKlass);
                 } else {
-                    headerElem.classList.remove('onway');
+                    header.classList.remove(showKlass);
                 }
+            } else {
+                header.classList.add(hideKlass);
+                header.classList.remove(showKlass);
             }
+            if (pageYOffset === 0) {
+                header.classList.add('toTop');
+            } else {
+                header.classList.remove('toTop');
+            }
+            lastCords = state;
         })
     }
 }
