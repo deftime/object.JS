@@ -60,7 +60,7 @@ let classToggler = {
 
 // Show, hide, toggle blocks by buttons (button.id = block.class)
 let blockToggler = {
-    tabs(buttonSet, blocksSet, mode = 'fade') {
+    tabs(buttonSet, blocksSet, mode = 'fade', delay = 300) {
         $(buttonSet).on('click', function(){
             switch (mode) {
                 case 'opacity':
@@ -71,20 +71,20 @@ let blockToggler = {
                     $(blocksSet).css('display', 'none');
                     break;
                 default:
-                    $(blocksSet).fadeOut(300);
+                    $(blocksSet).fadeOut(delay);
             }
             $(blocksSet).each((index, item)=>{
                 if ($(item).hasClass(this.id)) {
                     switch (mode) {
                         case 'opacity':
-                            $(item).delay(300).css('opacity', 1);
-                            $(item).delay(300).css('z-index', 10);
+                            $(item).delay(delay).css('opacity', 1);
+                            $(item).delay(delay).css('z-index', 10);
                             break;
                         case 'hard':
                             $(item).css('display', 'block');
                             break;
                         default:
-                            $(item).delay(300).fadeIn();
+                            $(item).delay(delay).fadeIn();
                     }
                 }
             })

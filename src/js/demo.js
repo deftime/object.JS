@@ -1,8 +1,10 @@
 window.onload = function() {
 
+    // Core
     classToggler.rotate('.btns button', 'active');
     dataMover.moveMark('.ct-target button', '.demo.ct-target');
 
+    // Demo
     classToggler.simple('.ct-simple .cube', 'active');
     classToggler.parent('.ct-parent .inner', '.ct-parent .cube', 'active');
     classToggler.set('.ct-set .cube', 'active');
@@ -10,7 +12,12 @@ window.onload = function() {
     classToggler.rotate('.ct-rotate .cube', 'active');
     classToggler.target('.ct-target .one', 'active', '.ct-target .two');
     classToggler.target('.ct-target .two', 'active', '.ct-target .one');
+    classToggler.rotate('.bt-tabs .togg', 'active');
 
+    blockToggler.tabs('.bt-tabs .togg', '.bt-tabs .t-block', 'hard');
+    blockToggler.openers('.bt-openers .plate');
+
+    // Demo support
     ctTarget();
     ctRotate();
 
