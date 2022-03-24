@@ -122,10 +122,48 @@ let blockToggler = {
         $(openBtn).on('click', function(){
             $(elemShow).fadeIn();
         })
+    }
+}
+
+// Positioning elements
+let goPosition = {
+    sticky(element, stopOffset, top = 20) {
+        let elem = document.querySelector(element);
+        let hParent = $('.gp-sticky .inner').height();
+        let hElem = $('.gp-sticky .stick').height();
+
+        if (elem) {
+            let statPos = elem.getBoundingClientRect().top + pageYOffset;
+            window.addEventListener('scroll', ()=>{
+                let elemRect = elem.getBoundingClientRect();
+                if (elemRect.top < 0 && pageYOffset < stopOffset) {
+                    elem.style.position = 'fixed';
+                } else if (pageYOffset < statPos || pageYOffset > stopOffset) {
+                    elem.style.position = 'absolute';
+                }
+
+                if (pageYOffset > stopOffset) {
+                    elem.style.top = (hParent - hElem) + 'px';
+                } else {
+                    elem.style.top = top + 'px';
+                }
+            })
+        }
+
     },
-    fixHeader(headerSelector, hideKlass, showKlass) {
+    fixHeader(headerElem, fixKlass) {
+        let header = document.querySelector(headerElem);
+        document.addEventListener('scroll', function(){
+            if (window.pageYOffset === 0) {
+                header.classList.remove(fixKlass);
+            } else {
+                header.classList.add(fixKlass);
+            }
+        })
+    },
+    fixHeaderHide(headerElem, hideKlass, showKlass) {
         let lastCords = 0;
-        let header = document.querySelector(headerSelector);
+        let header = document.querySelector(headerElem);
 
         if (pageYOffset > 0) {
             header.classList.add(showKlass);
@@ -133,7 +171,7 @@ let blockToggler = {
 
         window.addEventListener('scroll', function(){
             let state = window.pageYOffset;
-            if (state > lastCords) {
+            if (state < lastCords) {
                 header.classList.remove(hideKlass);
                 if (pageYOffset > 0) {
                     header.classList.add(showKlass);
@@ -146,8 +184,24 @@ let blockToggler = {
             }
             if (pageYOffset === 0) {
                 header.classList.add('toTop');
+                header.classList.remove(showKlass);
+                header.classList.remove(hideKlass);
             } else {
                 header.classList.remove('toTop');
+            }
+            lastCords = state;
+        })
+    },
+    ghostHere(menuSelector, showKlass, showOffset) {
+        let lastCords = 0;
+        let menu = document.querySelector(menuSelector);
+
+        window.addEventListener('scroll', function(){
+            let state = window.pageYOffset;
+            if (state > lastCords) {
+                menu.classList.remove(showKlass);
+            } else {
+                state > showOffset ? menu.classList.add(showKlass) : menu.classList.remove(showKlass);
             }
             lastCords = state;
         })
@@ -168,74 +222,6 @@ let simpleScroll = {
             })
         }
     }
-}
-
-// Positioning elements
-let goPosition = {
-    sticky(element) {
-        let elem = document.querySelector(element);
-
-        if (elem) {
-            let statPos = elem.getBoundingClientRect().top + pageYOffset;
-            window.addEventListener('scroll', ()=>{
-                let elemRect = elem.getBoundingClientRect();
-                if (elemRect.top < 0) {
-                    elem.style.position = 'fixed';
-                } else if (pageYOffset < statPos) {
-                    elem.style.position = 'absolute';
-                }
-            })
-        }
-
-    },
-    hideHeader(headerSelector, hideKlass, showKlass) {
-        let lastCords = 0;
-        let header = document.querySelector(headerSelector);
-
-        if (pageYOffset > 0) {
-            header.classList.add('onway');
-        }
-
-        window.addEventListener('scroll', function(){
-            let state = window.pageYOffset;
-            if (state > lastCords) {
-                header.classList.remove(hideKlass);
-                if (pageYOffset > 0) {
-                    header.classList.add(showKlass);
-                } else {
-                    header.classList.remove(showKlass);
-                }
-            } else {
-                header.classList.add(hideKlass);
-                header.classList.remove(showKlass);
-            }
-            lastCords = state;
-        })
-    },
-    fixHeader(headerSelector, fixKlass) {
-    let header = document.querySelector(headerSelector);
-        document.addEventListener('scroll', ()=>{
-            if (window.pageYOffset === 0) {
-                header.classList.remove(fixKlass);
-            } else {
-                header.classList.add(fixKlass);
-            }
-        })
-    },
-    ghostHere(menuSlector, showKlass) {
-    let lastCords = 0;
-    let menu = document.querySelector(menuSelector);
-
-    window.addEventListener('scroll', function(){
-        let state = window.pageYOffset;
-        if (state > lastCords) {
-            menu.classList.remove(showKlass);
-        } else {
-            state > 500 ? menu.classList.add(showKlass) : menu.classList.remove(showKlass);
-        }
-        lastCords = state;
-    })
-}
 }
 
 // Galleries

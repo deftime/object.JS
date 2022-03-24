@@ -19,9 +19,12 @@ window.onload = function() {
     blockToggler.open('.bt-openclose .js-open', '.bt-openclose .side');
     blockToggler.close('.bt-openclose .js-close', '.bt-openclose .side');
 
+    goPosition.sticky('.gp-sticky .stick', 4010);
+
     // Demo support
     ctTarget();
     ctRotate();
+    gpFixHeader();
 
 }
 
@@ -37,5 +40,15 @@ function ctTarget() {
 function ctRotate() {
     $('.ct-rotate button').on('click', function(){
         classToggler.rotate('.ct-rotate .cube', 'active', true);
+    })
+}
+
+function gpFixHeader() {
+    $('.gp-fixheader #js-fix').on('click', function(){
+        goPosition.fixHeader('header', 'fix');
+    })
+
+    $('.gp-fixheader #js-fixHide').on('click', function(){
+        goPosition.fixHeaderHide('header', 'hide', 'fix');
     })
 }

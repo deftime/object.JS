@@ -37,6 +37,28 @@ body {
 
 header {
   padding: 30px 10px;
+  transition: 0.5s ease;
+}
+
+header.fix,
+header.hide {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 10px;
+  box-shadow: 0 0 10px gray;
+  background-color: #fff;
+  z-index: 100;
+}
+
+header.fix .main-title {
+  font-size: 30px;
+  line-height: 35px;
+}
+
+header.hide {
+  transform: translateY(-100%);
 }
 
 /* GENERAL */
@@ -284,5 +306,39 @@ header {
   width: 100%;
   height: 100%;
   background-color: #8fd669;
+}
+
+.gp-fixheader {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.gp-fixheader .btns {
+  width: 100%;
+  justify-content: center;
+}
+
+.gp-sticky .inner {
+  position: relative;
+  height: 1200px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.gp-sticky .stick {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+  width: 200px;
+  height: 300px;
+  background-color: gray;
+
 }
 
