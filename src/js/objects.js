@@ -45,8 +45,8 @@ let classToggler = {
         }
     },
     _intoView(selector) {
-        let colect = document.querySelectorAll(selector);
-        for (let key of colect) {
+        let collect = document.querySelectorAll(selector);
+        for (let key of collect) {
             key.addEventListener('click', function(event){
                 event.target.scrollIntoView({
                     behavior: 'smooth',
@@ -60,7 +60,7 @@ let classToggler = {
 
 // Show, hide, toggle blocks by buttons (button.id = block.class)
 let blockToggler = {
-    tabs(buttonSet, blocksSet, mode = 'fade') {
+    tabs(buttonSet, blocksSet, mode = 'fade', delay = 300) {
         $(buttonSet).on('click', function(){
             switch (mode) {
                 case 'opacity':
@@ -71,20 +71,20 @@ let blockToggler = {
                     $(blocksSet).css('display', 'none');
                     break;
                 default:
-                    $(blocksSet).fadeOut(300);
+                    $(blocksSet).fadeOut(delay);
             }
             $(blocksSet).each((index, item)=>{
                 if ($(item).hasClass(this.id)) {
                     switch (mode) {
                         case 'opacity':
-                            $(item).delay(300).css('opacity', 1);
-                            $(item).delay(300).css('z-index', 10);
+                            $(item).delay(delay).css('opacity', 1);
+                            $(item).delay(delay).css('z-index', 10);
                             break;
                         case 'hard':
                             $(item).css('display', 'block');
                             break;
                         default:
-                            $(item).delay(300).fadeIn();
+                            $(item).delay(delay).fadeIn();
                     }
                 }
             })
@@ -122,26 +122,88 @@ let blockToggler = {
         $(openBtn).on('click', function(){
             $(elemShow).fadeIn();
         })
-    },
-    fixHeader(header) {
-        let headerElem = document.querySelector(header);
+    }
+}
 
-        if (pageYOffset > 0) {
-            headerElem.classList.add('onway');
+// Positioning elements
+let goPosition = {
+    sticky(element, stopOffset, top = 20) {
+        let elem = document.querySelector(element);
+        let hParent = $('.gp-sticky .inner').height();
+        let hElem = $('.gp-sticky .stick').height();
+
+        if (elem) {
+            let statPos = elem.getBoundingClientRect().top + pageYOffset;
+            window.addEventListener('scroll', ()=>{
+                let elemRect = elem.getBoundingClientRect();
+                if (elemRect.top < 0 && pageYOffset < stopOffset) {
+                    elem.style.position = 'fixed';
+                } else if (pageYOffset < statPos || pageYOffset > stopOffset) {
+                    elem.style.position = 'absolute';
+                }
+
+                if (pageYOffset > stopOffset) {
+                    elem.style.top = (hParent - hElem) + 'px';
+                } else {
+                    elem.style.top = top + 'px';
+                }
+            })
         }
 
-        window.addEventListener('wheel', function(event){
-            if (event.deltaY > 0) {
-                headerElem.classList.add('hide');
-                headerElem.classList.remove('onway');
-            } else if (event.deltaY < 0) {
-                headerElem.classList.remove('hide');
-                if (pageYOffset > 0) {
-                    headerElem.classList.add('onway');
-                } else {
-                    headerElem.classList.remove('onway');
-                }
+    },
+    fixHeader(headerElem, fixKlass) {
+        let header = document.querySelector(headerElem);
+        document.addEventListener('scroll', function(){
+            if (window.pageYOffset === 0) {
+                header.classList.remove(fixKlass);
+            } else {
+                header.classList.add(fixKlass);
             }
+        })
+    },
+    fixHeaderHide(headerElem, hideKlass, showKlass) {
+        let lastCords = 0;
+        let header = document.querySelector(headerElem);
+
+        if (pageYOffset > 0) {
+            header.classList.add(showKlass);
+        }
+
+        window.addEventListener('scroll', function(){
+            let state = window.pageYOffset;
+            if (state < lastCords) {
+                header.classList.remove(hideKlass);
+                if (pageYOffset > 0) {
+                    header.classList.add(showKlass);
+                } else {
+                    header.classList.remove(showKlass);
+                }
+            } else {
+                header.classList.add(hideKlass);
+                header.classList.remove(showKlass);
+            }
+            if (pageYOffset === 0) {
+                header.classList.add('toTop');
+                header.classList.remove(showKlass);
+                header.classList.remove(hideKlass);
+            } else {
+                header.classList.remove('toTop');
+            }
+            lastCords = state;
+        })
+    },
+    ghostHere(menuSelector, showKlass, showOffset) {
+        let lastCords = 0;
+        let menu = document.querySelector(menuSelector);
+
+        window.addEventListener('scroll', function(){
+            let state = window.pageYOffset;
+            if (state > lastCords) {
+                menu.classList.remove(showKlass);
+            } else {
+                state > showOffset ? menu.classList.add(showKlass) : menu.classList.remove(showKlass);
+            }
+            lastCords = state;
         })
     }
 }
@@ -160,74 +222,6 @@ let simpleScroll = {
             })
         }
     }
-}
-
-// Positioning elements
-let goPosition = {
-    sticky(element) {
-        let elem = document.querySelector(element);
-
-        if (elem) {
-            let statPos = elem.getBoundingClientRect().top + pageYOffset;
-            window.addEventListener('scroll', ()=>{
-                let elemRect = elem.getBoundingClientRect();
-                if (elemRect.top < 0) {
-                    elem.style.position = 'fixed';
-                } else if (pageYOffset < statPos) {
-                    elem.style.position = 'absolute';
-                }
-            })
-        }
-
-    },
-    hideHeader(headerSelector, hideKlass, showKlass) {
-        let lastCords = 0;
-        let header = document.querySelector(headerSelector);
-
-        if (pageYOffset > 0) {
-            header.classList.add('onway');
-        }
-
-        window.addEventListener('scroll', function(){
-            let state = window.pageYOffset;
-            if (state > lastCords) {
-                header.classList.remove(hideKlass);
-                if (pageYOffset > 0) {
-                    header.classList.add(showKlass);
-                } else {
-                    header.classList.remove(showKlass);
-                }
-            } else {
-                header.classList.add(hideKlass);
-                header.classList.remove(showKlass);
-            }
-            lastCords = state;
-        })
-    },
-    fixHeader(headerSelector, fixKlass) {
-    let header = document.querySelector(headerSelector);
-        document.addEventListener('scroll', ()=>{
-            if (window.pageYOffset === 0) {
-                header.classList.remove(fixKlass);
-            } else {
-                header.classList.add(fixKlass);
-            }
-        })
-    },
-    ghostHere(menuSlector, showKlass) {
-    let lastCords = 0;
-    let menu = document.querySelector(menuSelector);
-
-    window.addEventListener('scroll', function(){
-        let state = window.pageYOffset;
-        if (state > lastCords) {
-            menu.classList.remove(showKlass);
-        } else {
-            state > 500 ? menu.classList.add(showKlass) : menu.classList.remove(showKlass);
-        }
-        lastCords = state;
-    })
-}
 }
 
 // Galleries
@@ -262,10 +256,19 @@ let gallery = {
 
 // Collect and move any element's data
 let dataMover = {
-    tabText(elemsSet, dataName, targetElem) {
+    // Move text from data element's set to single target
+    moveText(elemsSet, dataElem, targetElem) {
         if ($(elemsSet.length > 0)) {
             $(elemsSet).on('click', function(){
-                $(targetElem).text(this.dataset[dataName]);
+                $(targetElem).text(this.dataset[dataElem]);
+            })
+        }
+    },
+    // Move class or ID from element's set to single target data
+    moveMark(elemsSet, targetElem){
+        if ($(elemsSet).length > 0){
+            $(elemsSet).on('click', function(){
+                $(targetElem).data('mode', this.classList[0]);
             })
         }
     }

@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Object.JS Demo</title>
+
+    <link rel="stylesheet" href="./src/css/styles.css">
+    <script src="./src/js/jquery-3.6.0.min.js" defer></script>
+    <script src="./src/js/objects.js" defer></script>
+    <script src="./src/js/demo.js" defer></script>
+</head>
+<body>
+
+<div class="wrapper">
+    <header>
+        <div class="main-title">Objects.JS</div>
+        <div class="main-sub">Made by Default</div>
+    </header>
+    <div class="object-title">
+        <span>Class toggler</span>
+        <span>Switch classes at various elements</span>
+    </div>
+    <section>
+        <div class="title">Toggle class by click on element</div>
+        <div class="demo ct-simple">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title">Toggle parent class by click on element</div>
+        <div class="demo ct-parent">
+            <div class="cube">
+                <span>Active</span>
+                <div class="inner"></div>
+            </div>
+            <div class="cube">
+                <span>Active</span>
+                <div class="inner"></div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="title">SET class by click on element</div>
+        <div class="demo ct-set">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title">REMOVE class by click on element</div>
+        <div class="demo ct-remove">
+            <div class="cube active"><span>Active</span></div>
+            <div class="cube active"><span>Active</span></div>
+            <div class="cube active"><span>Active</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title ct-target">
+            <span>Toggle/Set/Remove class target element</span>
+            <div class="btns">
+                <button class="set">Set</button>
+                <button class="remove">Remove</button>
+            </div>
+        </div>
+        <div class="demo ct-target">
+            <div class="cube one"><span>Active target</span></div>
+            <div class="cube two"><span>Active target</span></div>
+        </div>
+    </section>
+    <section>
+        <div class="title ct-rotate">
+            <span>Rotate class among elements</span>
+            <div class="btns">
+                <button>Into view</button>
+            </div>
+        </div>
+        <div class="demo ct-rotate">
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+            <div class="cube"><span>Active</span></div>
+        </div>
+    </section>
+    <div class="object-title">
+        <span>Block toggler</span>
+        <span>Show, hide, toggle blocks by buttons (button.id = block.class)</span>
+    </div>
+    <section>
+        <div class="title">
+            <span>Tabs</span>
+        </div>
+        <div class="demo bt-tabs">
+            <div class="toggles">
+                <div class="togg active" id="tab1">Tab 1</div>
+                <div class="togg" id="tab2">Tab 2</div>
+                <div class="togg" id="tab3">Tab 3</div>
+            </div>
+            <div class="tabs">
+                <div class="t-block tab1">
+                    Consectetur adipisicing elit. Amet aut cupiditate, dicta dolor ea eos est exercitationem explicabo fugiat laborum modi, mollitia nisi officia optio quasi recusandae reiciendis, veniam voluptate!
+                </div>
+                <div class="t-block tab2">
+                    Ipsum dolor sit amet, consectetur adipisicing elit. Ad consectetur eligendi fugit magni odio! Accusamus adipisci corporis cum ducimus ex fuga fugit, hic labore neque numquam provident, temporibus vero voluptate? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque maiores, nobis? At earum eius enim magnam, numquam perspiciatis quae veritatis? Atque autem dolore incidunt obcaecati quidem recusandae soluta sunt voluptas?
+                </div>
+                <div class="t-block tab3">
+                    Sit amet, consectetur adipisicing elit. Alias aliquam consequuntur dolore et, labore mollitia, necessitatibus officiis pariatur praesentium provident voluptas voluptates.
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="title">
+            <span>Openers</span>
+        </div>
+        <div class="demo bt-openers">
+            <div class="opener">
+                <div class="plate">
+                    <span>Open 1</span>
+                    <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/><path d="M0-.75h48v48h-48z" fill="none"/></svg>
+                </div>
+                <div class="o-block">
+                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias autem eligendi ex, hic itaque laborum magnam nesciunt odio officiis pariatur quaerat quas ratione reiciendis repellat veritatis, vero. Eaque, labore.</div>
+                </div>
+            </div>
+            <div class="opener">
+                <div class="plate">
+                    <span>Open 2</span>
+                    <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/><path d="M0-.75h48v48h-48z" fill="none"/></svg>
+                </div>
+                <div class="o-block">
+                    <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A alias autem eligendi ex, hic itaque laborum magnam nesciunt odio officiis pariatur quaerat quas ratione reiciendis repellat veritatis, vero. Eaque, labore. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis laboriosam obcaecati voluptates? Aperiam atque beatae blanditiis cumque eaque exercitationem, harum laboriosam officiis pariatur, porro quaerat repellendus, suscipit tempore. Illo, sed.</div>
+                </div>
+            </div>
+            <div class="opener">
+                <div class="plate">
+                    <span>Open 3</span>
+                    <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M14.83 16.42l9.17 9.17 9.17-9.17 2.83 2.83-12 12-12-12z"/><path d="M0-.75h48v48h-48z" fill="none"/></svg>
+                </div>
+                <div class="o-block">
+                    <div>Laborum magnam nesciunt odio officiis pariatur quaerat quas ratione reiciendis repellat veritatis, vero. Eaque, labore.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="title">
+            <span>Open and Close</span>
+        </div>
+        <div class="demo bt-openclose">
+            <div class="inner">
+                <div class="btn js-open">Open</div>
+                <div class="side">
+                    <div class="btn js-close">Close</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="object-title">
+        <span>Go position</span>
+        <span>Change position of elements relatively of page</span>
+    </div>
+    <section>
+        <div class="title">
+            <span>Sticky block</span>
+        </div>
+        <div class="demo gp-sticky">
+            <div class="inner">
+                <div class="stick">Sticky!</div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="title">
+            <span>Fix header</span>
+        </div>
+        <div class="demo gp-fixheader">
+            <div class="btns">
+                <button id="js-fix">Always fix</button>
+                <button id="js-fixHide">Hide if down</button>
+            </div>
+        </div>
+    </section>
+    <footer></footer>
+</div>
+
+</body>
+</html>
