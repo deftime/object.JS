@@ -263,3 +263,71 @@ let formsSend = {
 
     }
 }
+
+//Random view elements
+function randomView() {
+    let ques = document.querySelectorAll('.quotes .qu');
+    let elemCount = ques.length - 1;
+    let startQu = getRandomInt(0, elemCount);
+    let lastNum = 0;
+
+    if (elemCount > 0) {
+        ques[startQu].classList.add('view');
+
+        setInterval(function(){
+            let num = getRandomInt(0, elemCount);
+
+            if (num === lastNum && num < elemCount) {
+                num += 1;
+            } else if (num === lastNum && num >= elemCount) {
+                num -= 1;
+            }
+
+            for (key of ques) {
+                key.classList.remove('view');
+            }
+            ques[num].classList.add('view');
+
+            lastNum = num;
+        }, 7000);
+    }
+}
+
+//Observe and light anchors
+function observeTitles() {
+    let posts = document.querySelectorAll('.personal-content .p-item');
+    let anchors = document.querySelector('.personal-content .anchors');
+    let anchorsItems = document.querySelectorAll('.personal-content .anchors a');
+
+    let observer = new IntersectionObserver((entires, observer)=>{
+        entires.forEach(entry => {
+            let item = entry.target;
+            let a = anchors.querySelector(`a[href='#${item.id}']`);
+            if (entry.isIntersecting) {
+                $('.anchors a').removeClass('active');
+                a.classList.add('active');
+            }
+            // else {
+            //     a.classList.remove('active');
+            // }
+        });
+    }, {threshold: 0.5});
+
+    posts.forEach(item => {
+        observer.observe(item);
+    });
+}
+
+//Horizontal progress bar
+function horizontalProgress() {
+    let scrollElem = document.querySelector('.tariffs-price-box .col.table');
+    let bar = document.querySelector('.tariffs-price-box .progress');
+    let maxScroll = scrollElem.firstElementChild.offsetWidth - scrollElem.offsetWidth;
+    let step = 100 / maxScroll;
+
+    console.log(maxScroll);
+
+    scrollElem.addEventListener('scroll', (event)=>{
+        bar.style.width = (event.target.scrollLeft * step) + '%';
+    })
+}
