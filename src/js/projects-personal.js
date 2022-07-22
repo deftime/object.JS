@@ -331,3 +331,26 @@ function horizontalProgress() {
         bar.style.width = (event.target.scrollLeft * step) + '%';
     })
 }
+
+// Live counters for digits
+function runCounters(selector, speed, step = 1) {
+    console.log(`RUN!`);
+    let $counters = $(selector);
+
+    $counters.each(function (index, elem) {
+        let start = elem.dataset.start;
+        let end = elem.dataset.end;
+        console.log(end);
+
+        setInterval(function () {
+            if (start <= end) {
+                elem.innerHTML = start;
+                start = +(start + step);
+            } else {
+                elem.innerHTML = end.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+                elem.nextElementSibling.style.opacity = '1';
+                return;
+            }
+        }, speed)
+    })
+}
