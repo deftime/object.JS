@@ -296,3 +296,43 @@ let mathCount = {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 }
+
+//Observe and run animation
+let animations = {
+    observe(viewElement, runFunction) {
+        let elem = document.querySelector(viewElement);
+        let observer = new IntersectionObserver((entires, observer)=>{
+            entires.forEach(entry => {
+                let item = entry.target;
+                if (entry.isIntersecting) {
+                    runFunction();
+                }
+            });
+        }, {threshold: 0.3});
+        observer.observe(elem);
+    },
+    runCounters(selector, speed, step = 1) {
+        let $counters = $(selector);
+
+        if ($counters.length > 0) {
+            $counters.each(function (index, elem) {
+                let start = +elem.dataset.start;
+                let end = +elem.dataset.end;
+                let final = elem.dataset.final;
+
+                elem.style.opacity = '1';
+
+                let interval = setInterval(function () {
+                    if (start <= end) {
+                        elem.innerHTML = start;
+                        start = +(start + step);
+                        console.log(start);
+                    } else {
+                        elem.innerHTML = final;
+                        clearInterval(interval);
+                    }
+                }, speed)
+            })
+        }
+    }
+}
