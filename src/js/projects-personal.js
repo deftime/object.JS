@@ -354,3 +354,22 @@ function runCounters(selector, speed, step = 1) {
         }, speed)
     })
 }
+
+
+// More items
+function morePhoto() {
+    let btn = document.querySelector('.js-more-photo');
+    let hideItems = document.querySelectorAll('.gallery .photo-item.hide');
+
+    if (btn) {
+        btn.addEventListener('click', function(){
+            if (hideItems.length > 0) {
+                hideItems.forEach(function(elem, index){
+                    index < 12 ? $(elem).addClass('showed').fadeIn() : undefined;
+                })
+                hideItems = document.querySelectorAll('.gallery .photo-item.hide:not(.showed)');
+                hideItems.length === 0 ? this.style.display = 'none' : undefined;
+            }
+        })
+    }
+}
