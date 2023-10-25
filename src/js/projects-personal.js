@@ -373,3 +373,14 @@ function morePhoto() {
         })
     }
 }
+
+// Delay to show any elements
+function delayShow(elem, time, klass) {
+    let webElem = document.querySelector(elem);
+
+    if (webElem) {
+        setTimeout(() => {
+            webElem.classList.add(klass);
+        }, time);
+    }
+}
