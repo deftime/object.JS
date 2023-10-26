@@ -384,3 +384,21 @@ function delayShow(elem, time, klass) {
         }, time);
     }
 }
+
+// Autoplay YouTube under cover
+function autoPlayYoutube() {
+    let runCover = document.querySelectorAll('.video-box .video-pic');
+
+    if (runCover.length > 0) {
+        for (let key of runCover) {
+            let videoCode = key.dataset.frame;
+            let frame = `<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" src="https://www.youtube.com/embed/${videoCode}?autoplay=1&rel=0" title="YouTube video player" width="560" height="315" frameborder="0"></iframe>`;
+            if (videoCode) {
+                key.addEventListener('click', function(){
+                    this.parentElement.innerHTML = frame;
+                })
+            }
+        }
+    }
+
+}
