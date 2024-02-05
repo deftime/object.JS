@@ -304,17 +304,22 @@ let mathCount = {
 
 //Observe and run animation
 let animations = {
-    observe(viewElement, runFunction) {
-        let elem = document.querySelector(viewElement);
+    runObserver(viewElements, runFunction, threshold = 1, rootMargin = '0px') {
+        let elems = document.querySelectorAll(viewElements);
         let observer = new IntersectionObserver((entires, observer)=>{
             entires.forEach(entry => {
                 let item = entry.target;
                 if (entry.isIntersecting) {
-                    runFunction();
+                    runFunction(item, elems);
                 }
             });
-        }, {threshold: 0.3});
-        observer.observe(elem);
+        }, {
+            threshold,
+            rootMargin,
+        });
+        for (let key of elems) {
+            observer.observe(key);
+        }
     },
     runCounters(selector, speed, step = 1) {
         let $counters = $(selector);
