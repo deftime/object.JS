@@ -402,3 +402,30 @@ function autoPlayYoutube() {
     }
 
 }
+
+// Move lighter under selected list items
+function moveActiveRound(moveVw, elemsSet, bgLighter) {
+    let tabSet = document.querySelectorAll(elemsSet);
+    let round = document.querySelector(bgLighter);
+
+    for (let key of tabSet) {
+        key.addEventListener('click', function(){
+            let activeIndex = this.dataset.active;
+            round.style.left = `${activeIndex * moveVw}vw`;
+        })
+    }
+}
+
+// This method need to be reworked...
+function _intoView(selector) {
+    let collect = document.querySelectorAll(selector);
+    for (let key of collect) {
+        key.addEventListener('click', function(event){
+            event.target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                alignToTop: false
+            })
+        })
+    }
+}
