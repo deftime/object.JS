@@ -429,3 +429,21 @@ function _intoView(selector) {
         })
     }
 }
+
+function moreText() {
+    let textBlocks = document.querySelectorAll('.re2-line-big .desc');
+    let showBtns = document.querySelectorAll('.re2-line-big .js-more');
+
+    for (let key of textBlocks) {
+        if (key.clientHeight > 300) {
+            key.parentElement.classList.add('close');
+        }
+    }
+
+    for (let key of showBtns) {
+        key.addEventListener('click', function(){
+            this.parentElement.classList.remove('close');
+        })
+    }
+
+}
