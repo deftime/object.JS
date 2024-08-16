@@ -447,3 +447,17 @@ function moreText() {
     }
 
 }
+
+
+// Delay show any pieces of page (need improvement for auto hide and show without class)
+function delayShow(elems, time, klass) {
+    let webElems = document.querySelectorAll(elems);
+
+    if (webElems.length > 0) {
+        setTimeout(() => {
+            for (let key of webElems) {
+                key.classList.add(klass);
+            }
+        }, time);
+    }
+}
