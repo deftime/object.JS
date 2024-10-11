@@ -416,20 +416,6 @@ function moveActiveRound(moveVw, elemsSet, bgLighter) {
     }
 }
 
-// This method need to be reworked...
-function _intoView(selector) {
-    let collect = document.querySelectorAll(selector);
-    for (let key of collect) {
-        key.addEventListener('click', function(event){
-            event.target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-                alignToTop: false
-            })
-        })
-    }
-}
-
 function moreText() {
     let textBlocks = document.querySelectorAll('.re2-line-big .desc');
     let showBtns = document.querySelectorAll('.re2-line-big .js-more');

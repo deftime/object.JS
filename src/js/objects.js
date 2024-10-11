@@ -211,6 +211,18 @@ let goPosition = {
             }
             lastCords = state;
         })
+    },
+    intoView(selector, options = {
+        behavior: 'smooth',
+        block: 'start',
+        alignToTop: false
+    }) {
+        let collect = document.querySelectorAll(selector);
+        for (let key of collect) {
+            key.addEventListener('click', function(event){
+                event.target.scrollIntoView(options);
+            })
+        }
     }
 }
 
