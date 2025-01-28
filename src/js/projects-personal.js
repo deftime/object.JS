@@ -447,3 +447,22 @@ function delayShow(elems, time, klass) {
         }, time);
     }
 }
+
+// Sticky line with anchors
+function stickyLinks() {
+    let linksBox = document.querySelector('.re-single-banner-links .js-sticky-menu');
+
+    if (!linksBox) return;
+
+    window.addEventListener('scroll', ()=>{
+        let boxParams = linksBox.getBoundingClientRect();
+        if (boxParams.top < 30) {
+            linksBox.classList.add('stick');
+        }
+        if (pageYOffset < 500) {
+            console.log('remove!');
+            linksBox.classList.remove('stick');
+        }
+    })
+
+}
