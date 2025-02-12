@@ -466,3 +466,28 @@ function stickyLinks() {
     })
 
 }
+
+// Copy text by click
+function copyToClipboard(text) {
+    const input = document.createElement('input');
+    input.setAttribute('value', text);
+    document.body.appendChild(input);
+    input.select();
+    const result = document.execCommand('copy');
+    document.body.removeChild(input);
+    return result;
+}
+
+function copyBtn(){
+    if(!$('.js-copy-btn').length) return false;
+
+    $(document).on('click', '.js-copy-btn', function (e){
+        const btn = $(this);
+
+        if (copyToClipboard(btn.data('info'))) {
+            btn.addClass('copied');
+            setTimeout(() => btn.removeClass('copied'), 3000);
+        }
+        return false;
+    });
+}
