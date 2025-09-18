@@ -491,3 +491,38 @@ function copyBtn(){
         return false;
     });
 }
+
+function openServiceCard() {
+    let cards = document.querySelectorAll('.cards-grid-pop .js-card');
+    let pops = document.querySelectorAll('.cards-grid-pop .js-pop');
+    let btnsClose = document.querySelectorAll('.cards-grid-pop .js-pop-close');
+    let darker = document.querySelector('.cards-grid-pop .js-darker-cards');
+
+    if (cards.length === 0 || pops.length === 0) return;
+
+    for (let key of cards) {
+        key.addEventListener('click', ()=>{
+            pops.forEach((elem)=>{
+                if (key.dataset.card === elem.dataset.card) {
+                    elem.classList.add('open');
+                    $('body').addClass('open-main-menu');
+                } else {
+                    elem.classList.remove('open');
+                }
+            })
+        })
+    }
+
+    for (let key of btnsClose) {
+        key.addEventListener('click', ()=>{
+            $(pops).removeClass('open');
+            $('body').removeClass('open-main-menu');
+        })
+    }
+
+    darker.addEventListener('click', ()=>{
+        $(pops).removeClass('open');
+        $('body').removeClass('open-main-menu');
+    })
+
+}
