@@ -492,6 +492,7 @@ function copyBtn(){
     });
 }
 
+// Side popups (may be any popups)
 function openServiceCard() {
     let cards = document.querySelectorAll('.cards-grid-pop .js-card');
     let pops = document.querySelectorAll('.cards-grid-pop .js-pop');
@@ -525,4 +526,80 @@ function openServiceCard() {
         $('body').removeClass('open-main-menu');
     })
 
+}
+
+// Dark mode switcher
+const darkMode = {
+    init() {
+        if (!$(".js-dark-mode").length) return;
+
+        let contrastValue = this.setToggleContrast(false);
+        this.runToggleContrast(contrastValue);
+
+        $(document).on("click", ".js-dark-mode", function () {
+            let contrastValue = darkMode.setToggleContrast(true);
+            darkMode.runToggleContrast(contrastValue);
+        });
+    },
+    runToggleContrast(contrastValue) {
+        if (contrastValue === "white") {
+            $("body").addClass("dark-mode");
+        } else {
+            $("body").removeClass("dark-mode");
+        }
+    },
+    setToggleContrast(toggleValue) {
+        let cookieName = "isContrastAdded";
+        let contrastValue = darkMode.GetCookie(cookieName);
+
+        if (contrastValue == null) {
+            contrastValue = "black";
+            darkMode.SetCookie(cookieName, contrastValue);
+        } else {
+            if (toggleValue === true) {
+                if (contrastValue === "white") {
+                    contrastValue = "black";
+                    darkMode.SetCookie(cookieName, contrastValue);
+                } else {
+                    contrastValue = "white";
+                    darkMode.SetCookie(cookieName, contrastValue);
+                }
+            }
+        }
+        return contrastValue;
+    },
+    setContrastCookie(value) {
+        let expDate = new Date();
+        expDate.setDate(new Date().getDate() + 1);
+        document.cookie = "isContrastAdded=" + value + ";  path=/; expires=" + expDate.toUTCString();
+    },
+    SetCookie(cookieName, cookieValue, nHours) {
+        let today = new Date();
+        let expire = new Date();
+        if (nHours == null || nHours == 0) nHours = 24 * 31 * 12;
+        expire.setTime(today.getTime() + 3600000 * nHours);
+        document.cookie =
+            cookieName +
+            "=" +
+            cookieValue +
+            "; path=/;expires=" +
+            expire.toGMTString() +
+            "";
+    },
+    GetCookie(name) {
+        let dc = document.cookie;
+        let prefix = name + "=";
+        let begin = dc.indexOf("; " + prefix);
+        if (begin == -1) {
+            begin = dc.indexOf(prefix);
+            if (begin != 0) return null;
+        } else {
+            begin += 2;
+        }
+        let end = document.cookie.indexOf(";", begin);
+        if (end == -1) {
+            end = dc.length;
+        }
+        return unescape(dc.substring(begin + prefix.length, end));
+    }
 }
