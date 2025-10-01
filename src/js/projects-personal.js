@@ -603,3 +603,14 @@ const darkMode = {
         return unescape(dc.substring(begin + prefix.length, end));
     }
 }
+
+// Простой способ стопнуть скролл и мотать слик-слайдер
+$('.expertise-carousel').on('wheel', (function (e) {
+    e.preventDefault();
+
+    if (e.originalEvent.deltaY < 0) {
+        $('#counter_0').slick('slickNext');
+    } else {
+        $('#counter_0').slick('slickPrev');
+    }
+}));
