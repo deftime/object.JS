@@ -614,3 +614,104 @@ $('.expertise-carousel').on('wheel', (function (e) {
         $('#counter_0').slick('slickPrev');
     }
 }));
+
+// Сложный способ стопнуть скролл, выравнивать позицию и кастомно переключать слайды
+// Проблема - если не уйти полностью с блока, то функция стопа и скролла НЕ запустится, обсервер НЕ сработает.
+const sideScroll = {
+    section: document.querySelector('.slider-industry'),
+    get sectionTop() {
+        return this.section.offsetTop + 146
+    },
+    items: $('.slider-industry .item'),
+    count: 1,
+    enable: true,
+    init() {
+
+        // Общая функция обсервера сюда не входит! Подключить или использовать из Object
+        runObserver('.slider-industry', this.runSlides, 0.3);
+
+    },
+    runSlides() {
+        window.scroll(0, sideScroll.sectionTop);
+        sideScroll.disableScroll();
+        sideScroll.section.addEventListener('wheel', sideScroll.moveSlides);
+    },
+    stopSlides() {
+        sideScroll.enableScroll();
+        sideScroll.section.removeEventListener('wheel', sideScroll.moveSlides);
+    },
+    moveSlides(e) {
+        if (document.documentElement.scrollTop !== sideScroll.sectionTop) {
+            window.scroll(0, sideScroll.sectionTop);
+        }
+
+        if (!sideScroll.enable) return;
+        sideScroll.enable = false;
+        setTimeout(()=>{
+            sideScroll.enable = true
+        }, 700)
+
+        let moveCof = $(window).width() > 1920 ? 615 : 32;
+        let moveVal = $(window).width() > 1920 ? 'px' : 'vw';
+        if (e.deltaY > 0) {
+            // Down scroll, move right (forward)
+            if (sideScroll.count === 6) {
+                sideScroll.stopSlides();
+                console.log('Stop and Scroll DOWN!');
+            } else if (sideScroll.count === 4 || sideScroll.count === 5) {
+                let $active = $('.item.active');
+                if ($active.next()) {
+                    $active.next().addClass('active');
+                    $active.removeClass('active');
+                }
+                sideScroll.count += 1;
+            } else {
+                let moveNum = sideScroll.count * moveCof;
+                let $active = $('.item.active');
+                sideScroll.items.css(`transform`, `translateX(-${moveNum}${moveVal})`);
+                sideScroll.count += 1;
+
+                console.log('Count: ' + sideScroll.count);
+
+                if ($active.next()) {
+                    $active.next().addClass('active');
+                    $active.removeClass('active');
+                }
+            }
+        } else {
+            // Up scroll, move left (backward)
+            if (sideScroll.count === 1) {
+                sideScroll.stopSlides();
+                console.log('Stop and Scroll UP!');
+            } else if (sideScroll.count === 5 || sideScroll.count === 6){
+                let $active = $('.item.active');
+                if ($active.prev()) {
+                    $active.removeClass('active');
+                    $active.prev().addClass('active');
+                }
+                sideScroll.count -= 1;
+            } else {
+                let moveNum = (sideScroll.count - 2) * moveCof;
+                let $active = $('.item.active');
+                sideScroll.items.css(`transform`, `translateX(-${moveNum}${moveVal})`);
+                sideScroll.count -= 1;
+
+                console.log('Count: ' + sideScroll.count);
+
+                if ($active.prev()) {
+                    $active.removeClass('active');
+                    $active.prev().addClass('active');
+                }
+            }
+        }
+    },
+    disableScroll() {
+        window.addEventListener('wheel', sideScroll.stopScroll, {passive: false})
+    },
+    enableScroll() {
+        window.removeEventListener('wheel', sideScroll.stopScroll, {passive: false})
+    },
+    stopScroll(event) {
+        event.preventDefault();
+    }
+}
