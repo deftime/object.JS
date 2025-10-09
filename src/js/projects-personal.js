@@ -715,3 +715,48 @@ const sideScroll = {
         event.preventDefault();
     }
 }
+
+// Псевдо-стоп, секция плавает как sticky, визуально имитируя стоп
+// Считываем позицию скролла стик-елемента внутри его врапера
+// Проблема - нагрузка производительности, функция выполняется без остановки на каждый скролл по всему сайту.
+const sideScrollStick = {
+    section: document.querySelector('.slider-industry'),
+    items: $('.slider-industry .item'),
+    moveCof: $(window).width() > 1920 ? 615 : 32,
+    moveVal: $(window).width() > 1920 ? 'px' : 'vw',
+    init() {
+
+        runObserver('.slider-industry', this.runSlides, 0.1);
+
+    },
+    runSlides() {
+        window.addEventListener('scroll', sideScroll.moveSlides);
+    },
+    stopSlides() {
+        window.removeEventListener('scroll', sideScroll.moveSlides);
+    },
+    moveSlides() {
+        let position = sideScroll.section.offsetTop;
+        if (position < 1000 && position > 0) {
+            sideScroll.engine(0);
+        } else if (position > 1000 && position < 2000) {
+            sideScroll.engine(1);
+        } else if (position > 2000 && position < 3000) {
+            sideScroll.engine(2);
+        } else if (position > 3000 && position < 4000) {
+            sideScroll.engine(3);
+        } else if (position > 4000 && position < 5000) {
+            sideScroll.engine(4);
+        } else if (position > 5000 && position < 6000) {
+            sideScroll.engine(5);
+        }
+    },
+    engine(cofZone) {
+        let moveNum = cofZone * sideScroll.moveCof;
+        if (cofZone < 4) {
+            sideScroll.items.css(`transform`, `translateX(-${moveNum}${sideScroll.moveVal})`);
+        }
+        sideScroll.items.removeClass('active');
+        sideScroll.items[cofZone].classList.add('active');
+    }
+}
